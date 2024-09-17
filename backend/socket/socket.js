@@ -6,10 +6,7 @@ const app = express();
 
 const server = http.createServer(app);
 const io = new Server(server, {
-	cors: {
-		origin: ["https://secure-chat-app-1uls.onrender.com"],
-		methods: ["GET", "POST"],
-	},
+	cors: {},
 });
 
 export const getReceiverSocketId = (receiverId) => {
@@ -17,6 +14,11 @@ export const getReceiverSocketId = (receiverId) => {
 };
 
 const userSocketMap = {}; // {userId: socketId}
+
+io.use(socketioJwt.authorize({
+	secret: process.env.JWT_SECRET,
+	handshake: true
+}));
 
 io.on("connection", (socket) => {
 	console.log("a user connected", socket.id);

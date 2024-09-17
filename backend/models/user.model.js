@@ -8,24 +8,9 @@ const userSchema = new Schema({
     trim: true,
     index: true
   },
-  fullName: {
+  role:{
     type: String,
     required: true,
-    trim: true,
-    index: true
-  },
-  profilePic: {
-    type: String,
-    default:""
-  },
-  password: {
-    type: String,
-    required: [true, "Password is Required"]
-  },
-  gender: {
-    type: String,
-    required: true,
-    enum: ["male", "female"]
   }
 },
   {
